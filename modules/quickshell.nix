@@ -4,17 +4,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    gtk = {
-      enable = true;
-      iconTheme = {
-        package = pkgs.adwaita-icon-theme;
-        name = "Adwaita";
-      };
-    };
-    qt = {
-      enable = true;
-      platformTheme.name = "kde6";
-    };
     home.sessionVariables.ILLOGICAL_IMPULSE_VIRTUAL_ENV = "~/.local/state/quickshell/.venv";
 
     home.packages = with pkgs; [

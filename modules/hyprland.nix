@@ -54,32 +54,6 @@ in
 
     };
 
-    services.hypridle = {
-      enable = true;
-      settings = {
-        general = {
-          lock_cmd = "pidof hyprlock || hyprlock";
-          before_sleep_cmd = "loginctl lock-session";
-        };
-
-        listener = [
-          {
-            timeout = 120; # 120
-            on-timeout = "loginctl lock-session";
-          }
-          {
-            timeout = 600; # 10mins
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
-          {
-            timeout = 900; # 15mins
-            on-timeout = "systemctl suspend || loginctl suspend";
-          }
-        ];
-      };
-    };
-
     xdg.configFile."hypr/hyprland/scripts".source =         "${illogical-impulse-dotfiles}/.config/hypr/hyprland/scripts";
     xdg.configFile."hypr/hyprland/execs.conf".source =      "${illogical-impulse-dotfiles}/.config/hypr/hyprland/execs.conf";
     xdg.configFile."hypr/hyprland/general.conf".source =    "${illogical-impulse-dotfiles}/.config/hypr/hyprland/general.conf";

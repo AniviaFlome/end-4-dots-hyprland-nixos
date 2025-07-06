@@ -25,17 +25,13 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    illogical-impulse-dotfiles = {
-      url = "github:xBLACKICEx/dots-hyprland";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, anyrun, illogical-impulse-dotfiles, systems, ... }@ inputs:
+  outputs = { self, nixpkgs, anyrun, systems, ... }@ inputs:
     let
       inherit (nixpkgs) lib;
       eachSystem = lib.genAttrs (import systems);
+      illogical-impulse-dotfile = builtins.toPath ./hypr;
     in
     {
       legacyPackages = eachSystem (
