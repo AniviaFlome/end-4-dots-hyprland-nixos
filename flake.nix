@@ -31,7 +31,7 @@
     let
       inherit (nixpkgs) lib;
       eachSystem = lib.genAttrs (import systems);
-      illogical-impulse-dotfile = builtins.toPath ./hypr;
+      illogical-impulse-dotfiles = builtins.toPath ./hypr;
     in
     {
       legacyPackages = eachSystem (
