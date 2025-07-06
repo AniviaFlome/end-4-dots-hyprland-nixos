@@ -29,6 +29,7 @@ in
       kitty.enable = mkEnableOption "Enable illogical-impulse kitty";
       fish.enable = mkEnableOption "Enable illogical-impulse fish";
       starship.enable = mkEnableOption "Enable illogical-impulse starship";
+      mpv.enable = mkEnableOption "Enable illogical-impulse mpv";
     };
   };
 
@@ -51,6 +52,17 @@ in
       xdg.configFile."starship.toml".source = "${illogical-impulse-dotfiles}/.config/starship.toml";
 
       home.packages = [ pkgs.starship ];
+    })
+    (mkIf (config.illogical-impulse.enable && config.illogical-impulse.dotfiles.fish.enable) {
+      xdg.configFile."mpv/mpv.conf".source = "${illogical-impulse-dotfiles}/.config/mpv/mpv.conf";
+
+      home.packages = [ pkgs.mpv ];
+    })
+    (mkIf (config.illogical-impulse.enable && config.illogical-impulse.import.anyrun.enable) {
+      imports = [ (import ./anyrun.nix illogical-impulse-dotfiles) ];
+    })
+    (mkIf (config.illogical-impulse.enable && config.illogical-impulse.import.hyprland.enable) {
+      imports = [ (import ./hyprland.nix illogical-impulse-dotfiles) ];
     })
   ];
 }
